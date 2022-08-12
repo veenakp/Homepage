@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @package Vegam_Homepage
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Vegam\Homepage\Api\Data\BlockInterface"
+            type="Vegam\Homepage\Model\Data\Block"/>
+    <preference for="Vegam\Homepage\Api\BlockRepositoryInterface"
+            type="Vegam\Homepage\Model\BlockRepository"/>
+    <type name="Magento\Ui\Model\UrlInput\Url">
+        <plugin name="plugin_urlinput" type="Vegam\Homepage\Plugin\Url"/>
+    </type>
+    <virtualType name="blockGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="blockGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Vegam\Homepage\Model\ResourceModel\Block\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">BlockGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="block_listing_data_source" xsi:type="string">Vegam\Homepage\Model\ResourceModel\Block\Grid\Collection</item>
+                  <item name="slider_image_listing_data_source" xsi:type="string">Vegam\Homepage\Model\ResourceModel\SliderImage\Grid\Collection</item>
+         
+            </argument>
+        </arguments>
+    </type>
+    <type name="Vegam\Homepage\Model\ResourceModel\Block\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vegam_homedesign</argument>
+            <argument name="resourceModel" xsi:type="string">Vegam\Homepage\Model\ResourceModel\Block</argument>
+        </arguments>
+    </type> 
+    <!-- Image Uploader -->
+    <virtualType name="VirtualTypeName" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="basePath" xsi:type="string">block/icon</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Vegam\Homepage\Controller\Adminhtml\Index\Uploader">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">VirtualTypeName</argument>
+        </arguments>
+    </type>
+    <!-- End Image Uploader -->
+    <virtualType name="SliderImageGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SliderImageGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Vegam\Homepage\Model\ResourceModel\SliderImage\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SliderImageGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Vegam\Homepage\Model\ResourceModel\SliderImage\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vegam_slider_images</argument>
+            <argument name="eventPrefix" xsi:type="string">vegam_slider_images_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">vegam_slider_images_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Vegam\Homepage\Model\ResourceModel\SliderImage</argument>
+        </arguments>
+    </virtualType>
+    <preference for="Vegam\Homepage\Api\SliderImageRepositoryInterface" type="Vegam\Homepage\Model\SliderImageRepository" />
+    <preference for="Vegam\Homepage\Api\Data\SliderImageInterface" type="Vegam\Homepage\Model\Data\SliderImage" />
+</config>

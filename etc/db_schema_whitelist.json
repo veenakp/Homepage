@@ -1,0 +1,65 @@
+{
+    "vegam_homedesign": {
+        "column": {
+            "design_id": true,
+            "type": true,
+            "name": true,
+            "description": true,
+            "show_slider_title": true,
+            "autoplay": true,
+            "autoplay_timeout": true,
+            "autoplay_hover_pause": true,
+            "show_dots": true,
+            "store": true,
+            "slider_image": true,
+            "link_type": true,
+            "link": true,
+            "start_date": true,
+            "end_date": true,
+            "layout": true,
+            "image_one": true,
+            "link_one": true,
+            "image_two": true,
+            "link_two": true,
+            "image_three": true,
+            "link_three": true,
+            "image_four": true,
+            "link_four": true,
+            "category_id": true,
+            "product_count": true,
+            "content": true,
+            "product_type": true,
+            "product_ids": true,
+            "status": true,
+            "position": true,
+            "identifier": true,
+            "custom_image": true,
+            "banner_serialized": true,
+            "mobile_status": true,
+            "slider_width": true,
+            "template_type": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "vegam_slider_images": {
+        "column": {
+            "image_id": true,
+            "design_id": true,
+            "description": true,
+            "slider_image": true,
+            "link_type": true,
+            "template_type": true,
+            "slider_serialized": true,
+            "link": true,
+            "start_date": true,
+            "end_date": true,
+            "position": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "VEGAM_SLIDER_IMAGES_DESIGN_ID_VEGAM_HOMEDESIGN_DESIGN_ID": true
+        }
+    }
+}

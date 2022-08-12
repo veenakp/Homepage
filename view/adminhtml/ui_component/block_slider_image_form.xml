@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @package Vegam_Homepage
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd" component="Vegam_Homepage/js/slider/form">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">block_slider_image_form.block_slider_image_form_data_source</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="deleteConfirmationMessage" translate="true" xsi:type="string">Are you sure you want to delete this image?</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Update Image</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="cancel" class="Vegam\Homepage\Block\Adminhtml\Edit\SliderImage\CancelButton"/>
+            <button name="delete" class="Vegam\Homepage\Block\Adminhtml\Edit\SliderImage\DeleteButton"/>
+            <button name="save" class="Vegam\Homepage\Block\Adminhtml\Edit\SliderImage\SaveButton"/>
+        </buttons>
+        <namespace>block_slider_image_form</namespace>
+        <ajaxSave>true</ajaxSave>
+        <ajaxSaveType>simple</ajaxSaveType>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>block_slider_image_form.block_slider_image_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="block_slider_image_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="homeblock/sliders/saveImage"/>
+        </settings>
+        <dataProvider class="Vegam\Homepage\Ui\DataProvider\SliderImageDataProvider" name="block_slider_image_form_data_source">
+            <settings>
+                <requestFieldName>image_id</requestFieldName>
+                <primaryFieldName>image_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <container name="messages" component="Magento_Ui/js/form/components/html">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="additionalClasses" xsi:type="string">message message-error</item>
+                <item name="visible" xsi:type="boolean">false</item>
+                <item name="imports" xsi:type="array">
+                    <item name="responseData" xsi:type="string">${ $.parentName }:responseData</item>
+                </item>
+                <item name="listens" xsi:type="array">
+                    <item name="responseData.error" xsi:type="string">visible</item>
+                    <item name="responseData.messages" xsi:type="string">content</item>
+                </item>
+            </item>
+        </argument>
+    </container>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="is_collection" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <settings>
+            <label/>
+            <dataScope/>
+        </settings>
+
+
+        <field name="design_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>       
+        <field name="image_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field> 
+        <field formElement="imageUploader" name="slider_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">slider_image</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Slider Image</label>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>true</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="homeblock/custom/uploadImage"/>
+                        </uploaderConfig>
+                        <previewTmpl>Vegam_Homepage/image-preview</previewTmpl>
+                        <openDialogTitle>Media Gallery</openDialogTitle>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <urlInput name="link">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Link</label>
+                <dataScope>link</dataScope>
+                <urlTypes class="Magento\Ui\Model\UrlInput\LinksConfigProvider"/>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </urlInput>
+        <field name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">box</item>
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">block</item>
+                    <item name="dataScope" xsi:type="string">description</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="start_date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Start Date</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="dataScope" xsi:type="string">start_date</item>
+                    <item name="required-entry" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="end_date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">End Date</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="dataScope" xsi:type="string">end_date</item>
+                    <item name="required-entry" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="position">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Position</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="dataScope" xsi:type="string">position</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">false</item>
+                      <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>
