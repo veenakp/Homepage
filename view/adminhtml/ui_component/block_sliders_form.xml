@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @package Vegam_Homepage
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">block_sliders_form.block_sliders_form_data_source</item>
+            <item name="deps" xsi:type="string">block_sliders_form.block_sliders_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Slider Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">block_sliders_form</item>
+        </item>
+        <item name="buttons"  xsi:type="array">
+            <item name="back" xsi:type="string">Vegam\Homepage\Block\Adminhtml\Edit\BackButton</item>
+            <item name="save" xsi:type="string">Vegam\Homepage\Block\Adminhtml\Edit\SaveButton</item>
+            <item name="delete" xsi:type="string">Vegam\Homepage\Block\Adminhtml\Edit\DeleteButton</item>
+            <item name="save_and_continue" xsi:type="string">Vegam\Homepage\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <settings>
+       <layout>
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout>
+        <deps>
+            <dep>block_sliders_form.block_sliders_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="block_sliders_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Vegam\Homepage\Model\Block\DataProvider</argument>
+            <argument name="name" xsi:type="string">block_sliders_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">design_id</argument>
+            <argument name="requestFieldName" xsi:type="string">design_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="homeblock/sliders/saveslider"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true"> General Information</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+        <field name="type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Type</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">type</item>
+                    <item name="dataScope" xsi:type="string">type</item>
+                    <item name="default" xsi:type="string">SliderBlock</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="status" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable In Desktop</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>        
+        <field name="mobile_status" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable In Mobile</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>        
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="show_slider_title" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Display Title on Frontend</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field> 
+        <field name="template_type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vegam\Homepage\Model\Config\Source\Template</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="component" xsi:type="string">Vegam_Homepage/js/form/element/template</item>
+                    <item name="label" xsi:type="string" translate="true">Template</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">template_type</item>
+                    <item name="dataScope" xsi:type="string">template_type</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+                </item>
+            </argument>
+        </field>   
+        <container name="container_name">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/form/components/complex</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="additionalClasses" xsi:type="string">slider_preview</item>
+                <item name="label" xsi:type="string" translate="true"></item>
+            </item>
+        </argument>
+        </container>
+        <field name="slider_width">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vegam\Homepage\Model\Config\Source\SliderWidth</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Slider Width</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">slider_width</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">slider_width</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="autoplay" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                    <item name="component" xsi:type="string">Vegam_Homepage/js/form/element/autoplay</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Autoplay</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="autoplay_timeout">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Autoplay Timeout</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">autoplay_timeout</item>
+                    <item name="dataScope" xsi:type="string">autoplay_timeout</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">false</item>
+                      <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="autoplay_hover_pause" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Autoplay Hover Pause</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field> 
+        <field name="show_dots" component="Magento_Ui/js/form/element/single-checkbox-toggle-notice" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Show Dots Navigation</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field> 
+        <field name="store">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Store</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">store</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">store</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                       <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+        
+        <field name="position">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Sort Order</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="dataScope" xsi:type="string">position</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">false</item>
+                      <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field> 
+    </fieldset>
+    <fieldset name="items" class="Vegam\Homepage\Ui\Component\Form\ItemFieldset">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Images</label>
+            <componentType>fieldset</componentType>
+            <additionalClasses>
+                <class name="block-slider-image-form">true</class>
+            </additionalClasses>
+        </settings>          
+        <fieldset name="slider">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Slider Images</label>
+            <componentType>fieldset</componentType>
+        </settings>
+         <button name="add_sliderimage" component="Vegam_Homepage/js/slider/default-image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="buttonClasses" xsi:type="string">add-new-image-button</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">${ $.parentName}.slider_image_update_modal.update_slider_image_form_loader</item>
+                            <item name="actionName" xsi:type="string">destroyInserted</item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="targetName" xsi:type="string">${ $.parentName}.slider_image_update_modal</item>
+                            <item name="actionName" xsi:type="string">openModal</item>
+                        </item>
+                        <item name="2" xsi:type="array">
+                            <item name="targetName" xsi:type="string">${ $.parentName}.slider_image_update_modal.update_slider_image_form_loader</item>
+                            <item name="actionName" xsi:type="string">render</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <title translate="true">Add New Image</title>
+                <imports>
+                    <link name="parentId">${ $.provider}:data.design_id</link>
+                </imports>
+            </settings>
+        </button>
+        <modal name="slider_image_update_modal">
+            <settings>
+                <options>
+                    <option name="title" xsi:type="string" translate="true">Add/Update Image</option>
+                </options>
+            </settings>
+            <insertForm name="update_slider_image_form_loader" component="Vegam_Homepage/js/slider/insert-form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="imageListingProvider" xsi:type="string">ns = slider_image_listing, index = slider_image_listing</item>
+                        <item name="imageModalProvider" xsi:type="string">${ $.parentName }</item>
+                    </item>
+                </argument>
+                <settings>
+                    <formSubmitType>ajax</formSubmitType>
+                    <renderUrl path="mui/index/render_handle">
+                        <param name="handle">homeblock_sliders_image</param>
+                        <param name="buttons">1</param>
+                    </renderUrl>
+                    <loading>false</loading>
+                    <toolbarContainer>${ $.parentName }</toolbarContainer>
+                    <externalProvider>${ $.ns }.block_slider_image_form_data_source</externalProvider>
+                    <ns>block_slider_image_form</ns>
+                    <exports>
+                        <link name="parentId">${ $.externalProvider }:data.design_id</link>
+                    </exports>
+                    <imports>
+                        <link name="parentId">${ $.provider}:data.design_id</link>
+                        <link name="onImageDelete">${ $.ns }.${ $.ns }:deleteImageAction</link>
+                    </imports>
+                </settings>
+            </insertForm>
+        </modal>
+        <insertListing name="slider_image_listing" component="Vegam_Homepage/js/slider/insert-listing">
+            <settings>
+                <dataLinks>
+                    <exports>false</exports>
+                    <imports>true</imports>
+                </dataLinks>
+                <externalProvider>slider_image_listing.slider_image_listing_data_source</externalProvider>
+                <selectionsProvider>slider_image_listing.slider_image_listing.slider_image_columns.ids</selectionsProvider>
+                <autoRender>true</autoRender>
+                <dataScope>slider_image_listing</dataScope>
+                <ns>slider_image_listing</ns>
+                <exports>
+                    <link name="parent_id">${ $.externalProvider }:params.design_id</link>
+                </exports>
+                <imports>
+                    <link name="parent_id">${ $.provider }:data.design_id</link>
+                    <link name="onAction">ns = ${ $.ns }, index = actions:action</link>
+                </imports>
+            </settings>
+        </insertListing>
+    </fieldset>
+        <fieldset name="banner">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Banner Images</label>
+            <componentType>fieldset</componentType>
+            <additionalClasses>
+                <class name="block-banner-image">true</class>
+            </additionalClasses>
+        </settings>
+        <dynamicRows name="banner_rows" component="Vegam_Homepage/js/slider/dynamic-rows">
+        <settings>
+            <addButtonLabel translate="true">Add Banner</addButtonLabel>
+            <additionalClasses>
+                <class name="admin__field-wide">true</class>
+                <class name="banner-images">true</class>
+            </additionalClasses>
+            <componentType>dynamicRows</componentType>
+            <visible>true</visible>
+        </settings>
+        <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="isTemplate" xsi:type="boolean">true</item>
+                    <item name="is_collection" xsi:type="boolean">true</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                </item>
+            </argument>
+          <field formElement="imageUploader" name="image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">image</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Image</label>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <required>true</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="homeblock/sliders/upload"/>
+                        </uploaderConfig>
+                        <previewTmpl>Vegam_Homepage/image-preview</previewTmpl>
+                        <openDialogTitle>Media Gallery</openDialogTitle>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>4194304</maxFileSize>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">block</item>
+                    <item name="dataScope" xsi:type="string">title</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+        <field name="link">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Link</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">block</item>
+                    <item name="dataScope" xsi:type="string">link</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+        <field name="position">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">box</item>
+                    <item name="label" xsi:type="string" translate="true">Position</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">block</item>
+                    <item name="dataScope" xsi:type="string">position</item>
+                    <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">false</item>
+                      <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <actionDelete>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="componentType" xsi:type="string">actionDelete</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="fit" xsi:type="boolean">false</item>
+                        <item name="label" xsi:type="string">Actions</item>
+                        <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                        <item name="template" xsi:type="string">Magento_Backend/dynamic-rows/cells/action-delete
+                        </item>
+                    </item>
+                </argument>
+            </actionDelete>
+        </container>
+        </dynamicRows>
+    </fieldset>
+    </fieldset>
+</form>
